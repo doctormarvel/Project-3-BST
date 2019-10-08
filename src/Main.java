@@ -20,43 +20,47 @@ public class Main {
 			LazyBinarySearchTree LBST = new LazyBinarySearchTree();
 			
 			String operation = "";
-			
-			int key, height, size, min, max;
-			boolean result;
+			String colon = ":";
+			int key = 0;
 			String treeValues;
+			int height, size, min, max;
+			boolean result;
 			
 			while(in.hasNext()) {
 				operation = in.next();
-
+				for (int i = 0; i < operation.length() -1; i++) {
+					if (operation.charAt(i) == ':') {
+						String[] splitStrings = operation.split(colon);
+						operation = splitStrings[0];
+						key = Integer.parseInt(splitStrings[1]);
+					}
+				}
 				switch (operation) {
-				case "Insert:":
+				case "Insert":
 					try {
-						key = in.nextInt();
 						result = LBST.insert(key);
 						out.println(result ? "True" : "False");
 					}
 					catch (Exception e) {
-						out.println("ERROR insert");
+						out.println("Error in insert: IllegalArgumentException raised");
 					}
 					break;
-				case "Delete:":
+				case "Delete":
 					try {
-						key = in.nextInt();
 						result = LBST.delete(key);
 						out.println(result ? "True" : "False");
 					}
 					catch (Exception e) {
-						out.println("ERROR in delete");
+						out.println("Error in delete: IllegalArgumentException raised");
 					}
 					break;
-				case "Contains:":
+				case "Contains":
 					try {
-						key = in.nextInt();
 						result = LBST.contains(key);
 						out.println(result ? "True" : "False");
 					}
 					catch (Exception e) {
-						out.println("ERROR in contains");
+						out.println("Error in contains: IllegalArgumentException raised");
 					}
 					break;
 				case "FindMin":

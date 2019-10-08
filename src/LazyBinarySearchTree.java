@@ -137,28 +137,33 @@ public class LazyBinarySearchTree {
 	//need to test
 	public boolean contains(int key) {
 		boolean status = false;
-		if(leaf == null) {
-			return false;
+		if (key < 1 && key > 99) {
+			throw new IllegalArgumentException("The number is not between 1 and 99");
 		}
-		TreeNode current = leaf;
-		while (current != null) {
-			if (current.key == key && current.deleted == false) {
-				status = true;
-				break;
+		else {
+			if(leaf == null) {
+				return false;
 			}
-			else {
-				if (key > current.key) {
-					current = current.rightChild;
-				}
-				else if (key < current.key) {
-					current = current.leftChild;
+			TreeNode current = leaf;
+			while (current != null) {
+				if (current.key == key && current.deleted == false) {
+					status = true;
+					break;
 				}
 				else {
-					return false;
+					if (key > current.key) {
+						current = current.rightChild;
+					}
+					else if (key < current.key) {
+						current = current.leftChild;
+					}
+					else {
+						return false;
+					}
 				}
 			}
+			return status;
 		}
-		return status;
 	}
 	
 	
