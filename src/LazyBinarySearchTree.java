@@ -33,14 +33,14 @@ public class LazyBinarySearchTree {
 			TreeNode parent = null;
 			while(current != null) {
 				parent = current;
-				if (key > current.key && current.deleted == false) {
+				if (key > current.key) {
 					current = current.rightChild;
 				}
-				else if (key < current.key && current.deleted == false) {
+				else if (key < current.key) {
 					current = current.leftChild;
 				}
 				else if (key == current.key && current.deleted == true) {
-					//Undelete
+					current.deleted = false;
 					return true;
 				}
 				else {
@@ -102,8 +102,9 @@ public class LazyBinarySearchTree {
 		else {
 			TreeNode current = leaf;
 			while (current != null) {
-				if(current.leftChild == null && current.deleted == false) {
-					return min = current.key;
+				if(current.deleted == false) {
+					min = current.key;
+					current = current.leftChild;
 				}
 				else {
 					current = current.leftChild;
@@ -121,8 +122,9 @@ public class LazyBinarySearchTree {
 		else {
 			TreeNode current = leaf;
 			while (current != null) {
-				if(current.rightChild == null && current.deleted) {
-					return max = current.key;
+				if(current.deleted == false) {
+					max = current.key;
+					current = current.rightChild;
 				}
 				else {
 					current = current.rightChild;
