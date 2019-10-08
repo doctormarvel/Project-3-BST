@@ -6,6 +6,7 @@ public class LazyBinarySearchTree {
 		TreeNode rightChild;
 		boolean deleted;
 		
+		//Constructor for TreeNode
 		public TreeNode (int value) {
 			key = value;
 			leftChild = null;
@@ -13,13 +14,17 @@ public class LazyBinarySearchTree {
 			deleted = false;
 		}
 	}
+	//object for TreeNode
 	TreeNode leaf;
 	
+	//Constructor for LBST
 	public LazyBinarySearchTree() {
 		leaf = null;
 	}
 	
+	//Insert method, will only take values 1-99
 	public boolean insert(int key){
+		//Throws exception
 		if (key <1 || key > 99) {
 			throw new IllegalArgumentException("The number is not between 1 and 99");
 		}
@@ -30,7 +35,8 @@ public class LazyBinarySearchTree {
 				return true;
 			}
 			TreeNode current = leaf;
-			TreeNode parent = null;
+			TreeNode parent = null; //Needed to know value after while statement
+			//Runs through all nodes
 			while(current != null) {
 				parent = current;
 				if (key > current.key) {
@@ -43,11 +49,12 @@ public class LazyBinarySearchTree {
 					current.deleted = false;
 					return true;
 				}
+				//if the value is equal to the current node, this will pass a false
 				else {
 					return false;
 				}
 			}
-			
+			//Adding a new node to the LBST
 			TreeNode newLeaf = new TreeNode(key);
 			if(parent.key > key){
 				parent.leftChild = newLeaf;
@@ -61,7 +68,8 @@ public class LazyBinarySearchTree {
 			return status;
 		}
 	}
-	//need to test
+	
+	//deletes the node specified by the key, 1-99 accepted
 	public boolean delete(int key) {
 		boolean status = false;
 		if (key <1 || key > 99) {
@@ -73,8 +81,8 @@ public class LazyBinarySearchTree {
 			}
 			TreeNode current = leaf;
 			while (current != null) {
-				if (current.key == key) {
-					current.deleted = true; //Not saving the value
+				if (current.key == key && current.deleted == false) {
+					current.deleted = true;
 					status = true;
 					break;
 				}
@@ -94,6 +102,7 @@ public class LazyBinarySearchTree {
 		}
 	}
 	
+	//Find the min of the LBST
 	public int findMin() {
 		int min = -1;
 		if (leaf == null) {
@@ -102,6 +111,7 @@ public class LazyBinarySearchTree {
 		else {
 			TreeNode current = leaf;
 			while (current != null) {
+				//only change if deleted equals false
 				if(current.deleted == false) {
 					min = current.key;
 					current = current.leftChild;
@@ -114,6 +124,7 @@ public class LazyBinarySearchTree {
 		return min;
 	}
 	
+	//finds the max from the LBST
 	public int findMax() {
 		int max = -1;
 		if (leaf == null) {
@@ -123,6 +134,7 @@ public class LazyBinarySearchTree {
 			TreeNode current = leaf;
 			while (current != null) {
 				if(current.deleted == false) {
+					//Only changes if deleted equals false
 					max = current.key;
 					current = current.rightChild;
 				}
@@ -134,7 +146,7 @@ public class LazyBinarySearchTree {
 		return max;
 	}
 	
-	//need to test
+	//this method checks if a method exist and if it has not been deleted
 	public boolean contains(int key) {
 		boolean status = false;
 		if (key < 1 && key > 99) {
@@ -171,7 +183,7 @@ public class LazyBinarySearchTree {
 		return traverseTree(leaf);
 	}
 	
-	//Healper method for toString, uses recursion
+	//Helper method for toString, uses recursion
 	public String traverseTree(TreeNode root) {
 		if (root == null) {
 			return "";
@@ -190,6 +202,7 @@ public class LazyBinarySearchTree {
 		}
 	}
 	
+	//returns the heights of the LBST, whatever the highest node is returned.
 	public int height() {
 		return maxHeight(leaf);
 	}
@@ -212,10 +225,12 @@ public class LazyBinarySearchTree {
 		}
 	}
 	
+	//returns the size of the LBST, how many nodes exist
 	public int size() {
 		return sizeCount(leaf);
 	}
 	
+	//helper method for size
 	public int sizeCount(TreeNode root) {
 		if (root == null) {
 			return 0;

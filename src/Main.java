@@ -6,6 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner in;
+		//Check for 2 arguments
 		if (args.length != 2) {
 			System.out.print("Error Incorrect Arguments:" + Arrays.toString(args));
 			System.exit(0);
@@ -19,6 +20,7 @@ public class Main {
 			
 			LazyBinarySearchTree LBST = new LazyBinarySearchTree();
 			
+			//variables used in switch case
 			String operation = "";
 			String colon = ":";
 			int key = 0;
@@ -28,6 +30,7 @@ public class Main {
 			
 			while(in.hasNext()) {
 				operation = in.next();
+				//used to split if a colon exist
 				for (int i = 0; i < operation.length() -1; i++) {
 					if (operation.charAt(i) == ':') {
 						String[] splitStrings = operation.split(colon);
@@ -45,6 +48,7 @@ public class Main {
 						out.println("Error in insert: IllegalArgumentException raised");
 					}
 					break;
+					
 				case "Delete":
 					try {
 						result = LBST.delete(key);
@@ -54,6 +58,7 @@ public class Main {
 						out.println("Error in delete: IllegalArgumentException raised");
 					}
 					break;
+					
 				case "Contains":
 					try {
 						result = LBST.contains(key);
@@ -63,6 +68,7 @@ public class Main {
 						out.println("Error in contains: IllegalArgumentException raised");
 					}
 					break;
+					
 				case "FindMin":
 					try {
 						min = LBST.findMin();
@@ -72,6 +78,7 @@ public class Main {
 						out.println("ERROR in findMin");
 					}
 					break;
+					
 				case "FindMax":
 					try {
 						max = LBST.findMax();
@@ -81,6 +88,7 @@ public class Main {
 						out.println("ERROR in findMax");
 					}
 					break;
+					
 				case "PrintTree":
 					try {
 						treeValues = LBST.toString();
@@ -90,6 +98,7 @@ public class Main {
 						out.println("ERROR in print");
 					}
 					break;
+					
 				case "Height":
 					try {
 						height = LBST.height();
@@ -99,6 +108,7 @@ public class Main {
 						out.println("ERROR in height");
 					}
 					break;
+					
 				case "Size":
 					try {
 						size = LBST.size();
@@ -108,6 +118,7 @@ public class Main {
 						out.println("ERROR in size");
 					}
 					break;
+					
 				default:
 					out.println("Error in Line: " + operation);
 				}
