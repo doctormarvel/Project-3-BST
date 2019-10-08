@@ -104,6 +104,8 @@ public class Main {
 						out.println("ERROR in size");
 					}
 					break;
+				default:
+					out.println("Error in Line: " + operation);
 				}
 			}
 			in.close();
