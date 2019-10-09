@@ -210,7 +210,7 @@ public class LazyBinarySearchTree {
 	//Helper method for height
 	public int maxHeight (TreeNode root) {
 		if (root == null) {
-			return 0;
+			return -1;
 		}
 		else {
 			int leftHeight = maxHeight(root.leftChild);
